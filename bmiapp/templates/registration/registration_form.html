@@ -1,0 +1,36 @@
+{%extends 'registration/base.html'%}
+{%load bootstrap4 %}
+{%block content%}
+<div class="container col d-flex justify-content-center" style="padding-top: 90px">
+   <div class="row">
+       <div class="col-md-6 col-lg-6" >
+<div class="card  " style="width: 50rem;">
+   <div class="card-header">
+  <center> 
+    
+    <h1>Neighbourhoods</h1>
+   
+</center>
+   </div>
+   <div class="card-body">
+       <form method="post" action="/accounts/register/">
+           {% csrf_token %} {% for field in form %}
+           <p>
+               {{ field.label_tag }}
+               <br> {{ field }}
+                {% for error in field.errors %}
+               <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+           </p>
+           {% endfor %}
+           Have an account already?<a href="/accounts/login" style="color:#17413c">Login</a>
+           <p>By signing up, you agree to our Terms , Data Policy and Cookies Policy .</p>
+           <button type="submit" class=" btn-block btn-lg" style="background-color:#17413c;color:white"> Sign up</button>
+       </form>
+   </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+

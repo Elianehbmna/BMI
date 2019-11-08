@@ -1,0 +1,42 @@
+{%extends "base.html"%}
+{% load bootstrap3 %}
+{% block content %}
+<h1>
+  Calculate Your BMI
+</h1>
+ 
+{% for bmi in results %}
+{% if bmi.BMI >= 18.5 and bmi.BMI <= 24.9 %}
+<h2>
+  Your BMI is {{bmi.BMI}}
+  </h2>
+  <p>Your weight status is Normal</p>
+  {% endif %}
+  {% if bmi.BMI <= 18.5 %}
+<h2>
+  Your BMI is {{bmi.BMI}}
+  </h2>
+  <p>Your weight status is Underweight</p>
+  {% endif %}
+  {% if bmi.BMI >= 25 and bmi.BMI <= 29.9 %}
+<h2>
+  Your BMI is {{bmi.BMI}}
+  </h2>
+  <p>Your weight status is Overweight</p>
+  {% endif %}
+  {% if bmi.BMI >= 30 %}
+<h2>
+  Your BMI is {{bmi.BMI}}
+  </h2>
+  <p>Your weight status is Obese</p>
+  {% endif %}
+{% endfor %}
+
+<!-- action="." is same as action="/bmi/" -->
+<form action="{%url 'results'%}" method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" value="Calculate" />
+</form>
+
+{% endblock %}
